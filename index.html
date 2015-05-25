@@ -5,64 +5,161 @@
     <meta charset="utf-8">
     <title>jQuery Prototype</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<style>
-</style>
+    <style>
+    </style>
 </head>
 
 <body>
-<script>
+    <script>
+    var haystack = ['red', 'chair', 'pink', 'table', 'gray', 'green', 'tan'];
+    var needle = ['fridge', 'chair', 'desk', 'table', 'couch'];
+    var output = null;
 
-var haystack = ['red','chair', 'pink', 'table', 'gray', 'green', 'tan'];
-var needle = ['fridge', 'chair','desk','table','couch'];
-var output = null;
+
+    function search_array(array1, array2) {
+
+        var temp_array = [];
+        for (var i = 0; i < array1.length; i++)
+            for (var j = 0; j < array2.length; j++)
+                if (array1[i] == array2[j]) {
+                    temp_array.push(array1[i]);
+                    console.log('temp_array:' + temp_array);
+
+                };
 
 
-function search_array(array1, array2){
 
-var temp_array = [];
-for(var i=0; i < array1.length; i++) 
-  for(var j=0; j < array2.length; j++) 
-      if(array1[i] == array2[j]) {
-      temp_array.push(array1[i]);
-          console.log('temp_array:' + temp_array); 
-      
-      };
-   
-     
-  
-    output = temp_array;
+        output = temp_array;
+
+        console.log("This is the items that match in the 2 array " + output); //outputs
+
+    }
+
+    $(document).ready(function() {
+
+
+        search_array(haystack, needle);
+        addArrays(first_array, needle_array);
+
+    });
+
+    /*---------------------------------------------------------------------------*/
+
+    function addArrays(arr1, arr2) {
+        var add_arrays_output = []
+        if (arr1.length > arr2.length) {
+            var difference = arr1.length - arr2.length;
+            for (var i = 0; i < difference; i++) {
+                arr2.push(0)
+            }
+        } else if (arr2.length > arr1.length) {
+            var difference = arr2.length - arr1.length;
+            for (var i = 0; i < difference; i++) {
+                arr1.push(0)
+            }
+        }
+        for (i = 0; i < arr1.length && i < arr2.length; i++) {
+            var combined = arr1[i] + arr2[i];
+            add_arrays_output.push(combined);
+        }
+        console.log(add_arrays_output);
+    }
+
+    var first_array = [1, 2, 4, 5, 6]
+    var needle_array = [3, 5, 6, 7]
+
+    addArrays(first_array, needle_array);
+
+    /*---------------------------------------------------------------------------*/
     
-console.log("This is the items that match in the 2 array " + output);  //outputs
+
+
+    function matrixAdd(arr1, arr2) {
+        var matrix_add_output = [];
+        //Make the entire arrays equal in length - add more blank arrays where necessary.
+        if (arr1.length > arr2.length) {
+            var difference = arr1.length - arr2.length;
+            for (var i=0;i<difference;i++){
+            arr2.push([]);
+            }
+        } else if (arr2.length > arr1.length) {
+            var difference = arr2.length - arr1.length;
+            for (var i=0;i<difference;i++){
+            arr1.push([]);
+            }
+        }
+        //Make the inner arrays equal in length.
+        for (var i=0; i<arr1.length; i++){
+            if (arr1[i].length > arr2[i].length){
+                while (arr1[i].length > arr2[i].length)
+                    arr2[i].push(0);
+            }else if (arr2[i].length > arr1[i].length){
+                while (arr2[i].length > arr1[i].length)
+                    arr1[i].push(0);
+            }
+        }
+        //Add them
+        for(var i=0;i<arr1.length;i++){
+            var added_inner_arr = [];
+            for (var j=0;j<arr1[i].length; j++){
+                console.log('arr1[i][j] + arr2[i][j]: '+arr1[i][j] + arr2[i][j])
+                added_inner_arr.push(arr1[i][j] + arr2[i][j])
+                console.log('added_inner_arr: '+added_inner_arr)
+            }
+            console.log('added_inner_arr: '+ added_inner_arr);
+            matrix_add_output.push(added_inner_arr);
+            console.log("matrix_add_output: "+ matrix_add_output);
+        }
+
+
+        console.log('matrix_add_output[0]: '+ matrix_add_output[0]);
+        
 
 }
 
-$( document ).ready(function() {
- 
-
-search_array(haystack, needle); 
 
 
-});
+var matrix1 = [[1,2,3], [2,3,4], [5,6,7]]
+var matrix2 = [[2,3,4], [3,4,5]]
+
+matrixAdd(matrix1, matrix2);
+
+/*---------------------------------------------------------------------------*/
+
+function findFactors(number){
+    var factors = [];
+    for (i=1;i<number;i++){
+        if (number % i == 0){
+            factors.push(i);
+        }
+    }
+    console.log(factors);
+}
+findFactors(50);
+
+/*---------------------------------------------------------------------------*/
+var input_array = 
+[
+    {name: 'John', age:42, gender:'M'},
+    {name: 'Jack', age:34, gender:'M'},
+    {name: 'Michael',age:40, gender: 'M'},
+    {name: 'Kendra',age:48, gender:'F'}
+]
+function sortObjectListByName(obj_arr){
+    for (var i=1; i<obj_arr.length; i++){
+        if (obj_arr[i].name < obj_arr[i-1].name){
+            var less = obj_arr[i];
+            obj_arr[i] = obj_arr[i-1];
+            obj_arr[i-1]= less;
+            i = 1; 
+        }
+    }
+    console.log('obj_arr:' + obj_arr);
+}
+sortObjectListByName(input_array);
 
 
-
-
-</script>
-
-
+    </script>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
