@@ -157,6 +157,28 @@ function sortObjectListByName(obj_arr){
     console.log('obj_arr:' + obj_arr);
 }
 sortObjectListByName(input_array);
+/*---------------------------------------------------------------------------*/
+
+function twoLoops(){
+    for(var i=0, j=11; i<10, j>0; i++, j--){
+        console.log('i: ,j: '+i+' '+j)
+    }
+}
+twoLoops();
+
+/*---------------------------------------------------------------------------*/
+
+function randomizeList(arr){
+    var random_arr = [];
+    while (arr.length>0){
+    var current_index = Math.floor(Math.random() * (arr.length-1) + 0);
+        random_arr.push(arr.splice(current_index,1));
+    }
+    console.log('random_arr: ' + random_arr);
+}
+my_array = [1,4,6,3,4,8];
+randomizeList(my_array);
+
 
 
     </script>
